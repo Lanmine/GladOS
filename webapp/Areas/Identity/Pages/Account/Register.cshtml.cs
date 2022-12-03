@@ -80,6 +80,11 @@ namespace webapp.Areas.Identity.Pages.Account
             [Display(Name = "Etternavn")]
             public string LastName { get; set; }
             
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Fødselsdato")]
+            public DateTime DateOfBirth { get; set; }
+            
             [Display(Name = "Nickname")]
             public string Nickname { get; set; }
             
@@ -133,6 +138,7 @@ namespace webapp.Areas.Identity.Pages.Account
                 // Add additional attributes from ApplicationUser
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                user.DateOfBirth = Input.DateOfBirth;
                 user.Nickname = Input.Nickname;
                 
                 var result = await _userManager.CreateAsync(user, Input.Password);

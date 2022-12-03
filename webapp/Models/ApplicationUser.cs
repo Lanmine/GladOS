@@ -14,8 +14,9 @@ public class ApplicationUser : IdentityUser<Guid>
     [StringLength(64, MinimumLength = 4)]
     public string? Nickname;
     
-    //[Required]
-    //public DateOnly DateOfBirth;
+    [Required]
+    [DataType(DataType.Date)]
+    public DateTime DateOfBirth { get; set; }
     
     //public DateTime DateCreated { get; } = DateTime.Now;
     //public DateTime DateModified { get; set; }
