@@ -27,4 +27,12 @@
         <PackageReference Include="Npgsql" Version="6.0.7" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Event\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Event\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Event\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Event\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Event\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

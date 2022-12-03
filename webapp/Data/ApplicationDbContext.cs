@@ -11,4 +11,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityR
         : base(options)
     {
     }
+
+    public DbSet<Event> Event => Set<Event>();
 }
