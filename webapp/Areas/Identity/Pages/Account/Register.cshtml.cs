@@ -74,20 +74,41 @@ namespace webapp.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "Fornavn")]
-            public string FirstName { get; set; }
-            
+            [StringLength(64, MinimumLength = 2, ErrorMessage = "Fornavn må være mellom 2 og 64 bokstaver")]
+            public string FirstName { get; set; } = String.Empty;
+    
             [Required]
             [Display(Name = "Etternavn")]
-            public string LastName { get; set; }
+            [StringLength(64, MinimumLength = 2, ErrorMessage = "Etternavn må være mellom 2 og 64 bokstaver")]
+            public string LastName { get; set; } = String.Empty;
+    
+            [Display(Name = "Nickname")]
+            [StringLength(64, MinimumLength = 4, ErrorMessage = "Nickname må være mellom 4 og 64 bokstaver")]
+            public string? Nickname;
+    
+            [Required]
+            [Display(Name = "Fødselsdato")]
+            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; set; }
+    
+            // Address info
+            [Required]
+            [Display(Name = "Adresse")]
+            [StringLength(64, MinimumLength = 4, ErrorMessage = "Addressen må være mellom 4 og 64 bokstaver")]
+            public string Address { get; set; } = String.Empty;
             
             [Required]
-            [DataType(DataType.Date)]
-            [Display(Name = "Fødselsdato")]
-            public DateTime DateOfBirth { get; set; }
-            
-            [Display(Name = "Nickname")]
-            public string Nickname { get; set; }
-            
+            [Display(Name = "Postkode")]
+            [StringLength(4, MinimumLength = 4, ErrorMessage = "Postkoden må være 4 tall")]
+            [RegularExpression("^[0-9]*$", ErrorMessage = "Postkoden må bestå av tall")]
+            public string PostalCode { get; set; } = String.Empty;
+    
+            [Required]
+            [Display(Name = "Poststed")]
+            [StringLength(64, MinimumLength = 4, ErrorMessage = "Poststed må være mellom 4 og 64 bokstaver")]
+            public string City { get; set; } = String.Empty;
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -140,6 +161,9 @@ namespace webapp.Areas.Identity.Pages.Account
                 user.LastName = Input.LastName;
                 user.DateOfBirth = Input.DateOfBirth;
                 user.Nickname = Input.Nickname;
+                user.Address = Input.Address;
+                user.PostalCode = Input.PostalCode;
+                user.City = Input.City;
                 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
