@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace webapp.Controllers
         }
 
         // GET: Event/Create
+        [Authorize(Roles="Admin")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +58,7 @@ namespace webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> Create([Bind("Id,Archived,Name,Description,Start,End,HumanReadableUrl")] Event @event)
         {
             if (ModelState.IsValid)
@@ -69,6 +72,7 @@ namespace webapp.Controllers
         }
 
         // GET: Event/Edit/5
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Event == null)
@@ -89,6 +93,7 @@ namespace webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Archived,Name,Description,Start,End,HumanReadableUrl")] Event @event)
         {
             if (id != @event.Id)
@@ -120,6 +125,7 @@ namespace webapp.Controllers
         }
 
         // GET: Event/Delete/5
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Event == null)
@@ -140,6 +146,7 @@ namespace webapp.Controllers
         // POST: Event/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Event == null)
