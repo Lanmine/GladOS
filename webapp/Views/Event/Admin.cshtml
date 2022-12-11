@@ -1,17 +1,20 @@
-@model IEnumerable<webapp.Models.Event>
+﻿@model IEnumerable<webapp.Models.Event>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Admin";
 }
 
 <h1>Events</h1>
 
+<p>
+    <a asp-action="Create" class="rounded bg-dark text-black p-1">Lag Event</a>
+</p>
 <table class="table p-4">
     <thead>
     <tr class="bg-dark text-white rounded p-4">
         <th>
             @Html.DisplayNameFor(model => model.Name)
-            </th>
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Archived)
         </th>
@@ -33,14 +36,14 @@
     </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr class="bg-secondary text-black rounded" >
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Archived)
-                </td>
+            </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>*@
@@ -54,11 +57,11 @@
                 @Html.DisplayFor(modelItem => item.HumanReadableUrl)
             </td>*@
             <td>
-                <a asp-action="Details" asp-route-id="@item.HumanReadableUrl" class="text-black">Detaljer</a> 
-                @*<a asp-action="Edit" asp-route-id="@item.Id" class="text-black">Endre |</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="text-black">Slett</a>*@
+                <a asp-action="Edit" asp-route-id="@item.Id" class="text-black" >Endre |</a> 
+                <a asp-action="Details" asp-route-id="@item.HumanReadableUrl" class="text-black">Detaljer |</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="text-black">Slett</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

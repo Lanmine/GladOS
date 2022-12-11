@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +27,18 @@ namespace webapp.Controllers
                           View(await _context.Event.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Event'  is null.");
         }
-
-        // GET: Event/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        
+        // GET: Admin
+        public async Task<IActionResult> Admin()
+        {
+            return _context.Event != null ? 
+                View(await _context.Event.ToListAsync()) :
+                Problem("Entity set 'ApplicationDbContext.Event'  is null.");
+        }
+        
+        //GET: Event/Admin/5
+        // TODO: Make the URL into 'Event/Admin/5' instead of 'Event/AdminEvent/5'
+        public async Task<IActionResult> AdminEvent(string? id)
         {
             if (id == null || _context.Event == null)
             {
@@ -36,7 +46,25 @@ namespace webapp.Controllers
             }
 
             var @event = await _context.Event
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.HumanReadableUrl == id);
+            if (@event == null)
+            {
+                return NotFound();
+            }
+
+            return View(@event);
+        }
+
+        // GET: Event/Details/5
+        public async Task<IActionResult> Details(string? id)
+        {
+            if (id == null || _context.Event == null)
+            {
+                return NotFound();
+            }
+
+            var @event = await _context.Event
+                .FirstOrDefaultAsync(m => m.HumanReadableUrl == id);
             if (@event == null)
             {
                 return NotFound();
