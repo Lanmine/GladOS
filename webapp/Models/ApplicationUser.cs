@@ -42,11 +42,11 @@ public class ApplicationUser : IdentityUser<Guid>
     [StringLength(64, MinimumLength = 4, ErrorMessage = "Poststed må være mellom 4 og 64 bokstaver")]
     public string City { get; set; } = String.Empty;
 
-    //public DateTime DateCreated { get; } = DateTime.Now;
+    public DateTime DateCreated { get; set; } = DateTime.Now;
+    
     //public DateTime DateModified { get; set; }
-
-    //public ExtraInfo ExtraInfo;
 
     //public File ProfilePicture;
     //public ExtraInfo ExtraInfo;
+    //public Guardian Guardian;
 }
