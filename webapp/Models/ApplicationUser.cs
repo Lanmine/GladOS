@@ -17,7 +17,7 @@ public class ApplicationUser : IdentityUser<Guid>
     
     [Display(Name = "Nickname")]
     [StringLength(64, MinimumLength = 4, ErrorMessage = "Nickname må være mellom 4 og 64 bokstaver")]
-    public string? Nickname;
+    public string? Nickname { get; set; }
     
     [Required]
     [Display(Name = "Fødselsdato")]
